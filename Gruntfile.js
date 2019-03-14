@@ -1,34 +1,47 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
-    htmlhint: {
-      html: {
-        options: {
-                    htmlhintrc: '.htmlhintrc'   
-            
-        },
-        src: ['*.html'] 
-      }          
-    },
-    
-    csslint: {
-         options: {
-               csslintrc: '.csslintrc'
-         },
-         src: ['rectangle.css']
-    },
-  
-    eslint: {
-        options: {
-                configFile: '.eslintrc.json'
-        },
-        target: ['rectangle.js']  
-    }
-  });
-    grunt.loadNpmTasks('grunt-htmlhint');
-    grunt.registerTask('default', ['htmlhint']);
-    grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.registerTask('default', ['csslint']);
-    grunt.loadNpmTasks('grunt-eslint');
-    grunt.registerTask('default', ['eslint']);
+          cssmin: {  
+              options: {
+                  mergeIntoShorthands: false,
+                  roundingPrecision: -1
+              },
+              target: {
+                  files: {
+                    'dist/rectangle.css': ['./retangle.css']
+                  }   
+              }
+          }, 
 
+          htmlmin: {
+               options: {
+                    collapseWhitespace: true,
+                    preserveLineBreaks: false
+              },
+              files: {
+                    src: './index.html',
+                    dest: 'dist/index.html'
+              }
+          },
+
+          uglify: {
+               release: {
+                     files: {
+                          'dist/rectangle.js': ['./rectangle.js'],
+                          'dist/calc.js':['./calc.js']
+                      }          
+               }
+           }
+                      
+  });
+
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['cssmin']); 
+
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.registerTask('default', ['htmlmin']); 
+
+
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    grunt.registerTask('default', ['uglify']); 
 };
