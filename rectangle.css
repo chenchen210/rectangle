@@ -8,7 +8,17 @@ input,label{
   font-size:1em;
   padding-left:5px;
 }
+#width-validation{
+  margin:0px;
+  color:red;
+}
+#height-validation{
+  display:inline-block;
+  margin:0px;
+  color:red;
+}
 #calculate{
+  display:inline-block;
   width:70px;
   margin-left:63px;
 }
